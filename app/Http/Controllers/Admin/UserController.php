@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
@@ -101,5 +102,31 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['code' => 200, 'status' => 'success', 'message' => 'Successfuly deleted this data.']);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function forgot(string $id)
+    {
+        $users = User::find($id);
+        return view("pages.admin.users.forgot", compact("users"));
+    }
+
+    public function change(Request $request, string $id) 
+    {
+        $request->validate([
+            "password" => "required|min:8|confirmed",
+            "password_confirmation" => "required"
+        ]);  
+
+        $user = User::find($id);
+
+        $post = $request->except('password_old', 'password_confirmation');
+        $post['password'] = Hash::make($request->password);
+
+        $user->update($post);
+
+        return redirect()->route('users.index')->with('success', 'Successfully changed password');
     }
 }

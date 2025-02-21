@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\AcountWhatsaapController;
 use App\Http\Controllers\User\AutoMessageController;
+use App\Http\Controllers\User\ChangePasswordController;
 use App\Http\Controllers\User\SetApiKeyController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,8 @@ Route::group(['middleware' => ['auth']], function() {
             Route::get('/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
             Route::put('/{id}/update', [UserController::class, 'update'])->name('users.update');
             Route::delete('/{id}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
+            Route::get('/{id}/forgot', [UserController::class, 'forgot'])->name('user.forgot');
+            Route::put('/{id}/change', [UserController::class, 'change'])->name('user.change');
         });
 
         Route::prefix('subscription')->group(function() {
@@ -75,6 +78,11 @@ Route::group(['middleware' => ['auth']], function() {
             Route::put('/{id}/update', [SetApiKeyController::class, 'update'])->name('apikey.update');
             Route::delete('/{id}/destroy', [SetApiKeyController::class, 'destroy'])->name('apikey.destroy');
             Route::get('/{id}/{unique}/relink', [SetApiKeyController::class, 'relink'])->name('apikey.relink');
+        });
+
+        Route::prefix('change-password')->group(function() {
+            Route::get('/', [ChangePasswordController::class, 'index'])->name('change.password.index');
+            Route::put('/{id}/update', [ChangePasswordController::class, 'update'])->name('change.password.update');
         });
     });
 });

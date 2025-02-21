@@ -60,7 +60,7 @@
                                     <a href="{{ route('users.edit', ['id' => $item->id]) }}" class="btn btn-warning btn-sm" title="Edit">
                                         <i class="feather icon-edit"></i>
                                     </a>
-                                    <a href="{{ route('users.edit', ['id' => $item->id]) }}" class="btn btn-info btn-sm" title="Change Password">
+                                    <a href="{{ route('user.forgot', ['id' => $item->id]) }}" class="btn btn-info btn-sm" title="Change Password">
                                         <i class="feather icon-lock"></i>
                                     </a>
                                     <a href="javascript:void(0)" onclick="return deleteUsers('{{ $item->id }}')" class="btn btn-danger btn-sm" title="Delete">

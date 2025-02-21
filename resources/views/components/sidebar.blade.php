@@ -114,8 +114,8 @@
                             <span class="pcoded-mtext">Set Api Key Watsaapmatic</span>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a href="#" class="nav-link ">
+                    <li class="nav-item {{ Route::is('change.password*') ? 'active' : '' }}">
+                        <a href="{{ route('change.password.index') }}" class="nav-link ">
                             <span class="pcoded-micon">
                                 <i class="feather icon-lock"></i>
                             </span>

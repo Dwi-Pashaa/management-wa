@@ -11,6 +11,16 @@
 @section('content')
     @include('components.alert-success')
 
+    <div class="alert alert-info">
+        If you want to create an Api Key on Watsaapmatic, make sure the Api Key permissions are as follows
+        <ul class="mt-2">
+            <li>wa_send</li>
+            <li>validate_wa_phone</li>
+            <li>get_wa_accounts</li>
+            <li>create_whatsapp</li>
+        </ul>
+    </div>
+
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between">
@@ -82,6 +92,24 @@
         </div>
     </div>
 
+    @php
+        $devices = (is_array($device) && isset($device['data']) && is_array($device['data']) && !empty($device['data']))
+        ? $device['data']
+        : [];
+    @endphp
+
+    @if ($apikey != null && $hasDevices == false)
+        <div class="alert alert-warning">
+            <b>The device is connected successfully</b>, 
+            but there is something wrong with the permissions on the watsaapmatic api key. 
+            Please check whether the permissions are the same as in the example above,
+            Please check the watsaapmatic api key via the following link 
+            <a href="https://app.wasapmatic.com/dashboard/tools/keys" target="_blank" class="text-info">
+                https://app.wasapmatic.com/dashboard/tools/keys
+            </a>
+        </div>
+    @endif 
+
     <div class="card">
         <div class="card-header">
             <b>Device Connected</b>
@@ -99,11 +127,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $device = is_array($device) && isset($device['data']) && !empty($device['data']) ? $device['data'] : $device;
-                        @endphp
-                        @if ($deviceCount > 0)
-                            @forelse ($device as $dc)
+                        @if ($hasDevices == true && !empty($devices))
+                            @forelse ($devices as $dc)
                                 <tr>
                                     <td>1</td>
                                     <td>{{ $dc['phone'] }}</td>

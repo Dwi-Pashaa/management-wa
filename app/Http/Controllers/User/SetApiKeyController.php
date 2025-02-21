@@ -26,7 +26,6 @@ class SetApiKeyController extends Controller
                     ->first();
 
         $device = [];
-        $deviceCount = 0;
 
         if ($apikey != null) {
             $url = "https://app.wasapmatic.com/api/get/wa.accounts";
@@ -41,14 +40,19 @@ class SetApiKeyController extends Controller
                 
                 if ($response->successful()) {
                     $device = $response->json();
-                    $deviceCount = count($device['data']);
+
+                    if ($device['status'] == 200) {
+                        $hasDevices = true;
+                    } else {
+                        $hasDevices = false;
+                    }
                 }
             } catch (\Exception $e) {
                 $device = ['error' => $e->getMessage()];
             }
         }
 
-        return view("pages.user.set-apikey.index", compact("apikey", "device", "deviceCount"));
+        return view("pages.user.set-apikey.index", compact("apikey", "device", "hasDevices"));
     }
 
     /**

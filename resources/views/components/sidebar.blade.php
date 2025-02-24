@@ -83,7 +83,7 @@
                     <li class="nav-item pcoded-menu-caption">
                         <label>Menu</label>
                     </li>
-                    <li class="nav-item pcoded-hasmenu">
+                    <li class="nav-item pcoded-hasmenu {{ Route::is('form*') ? 'active' : '' }}">
                         <a href="#!" class="nav-link ">
                             <span class="pcoded-micon">
                                 <i class="feather icon-clipboard"></i>
@@ -91,8 +91,16 @@
                             <span class="pcoded-mtext">Create & Customize Form</span>
                         </a>
                         <ul class="pcoded-submenu">
-                            <li><a href="layout-vertical.html" target="_blank">Create Form</a></li>
-                            <li><a href="layout-horizontal.html" target="_blank">List Form</a></li>
+                            <li>
+                                <a href="{{ route('form.create') }}">
+                                    Create Form
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('form.index') }}">
+                                    List Form
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item {{ Route::is('auto.message*') ? 'active' : '' }}">

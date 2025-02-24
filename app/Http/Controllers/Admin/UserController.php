@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -50,6 +51,7 @@ class UserController extends Controller
         ]);
 
         $post = $request->except("password_confirmation");
+        $post['slug'] = Str::slug($request->name);
 
         $user = User::create($post);
         $user->assignRole("User");
@@ -82,6 +84,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         $put = $request->all();
+        $put['slug'] = Str::slug($request->name);
 
         $user->update($put);
 

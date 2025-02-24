@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\User\AcountWhatsaapController;
 use App\Http\Controllers\User\AutoMessageController;
 use App\Http\Controllers\User\ChangePasswordController;
+use App\Http\Controllers\User\FormController;
 use App\Http\Controllers\User\SetApiKeyController;
 use Illuminate\Support\Facades\Route;
 
@@ -60,6 +61,18 @@ Route::group(['middleware' => ['auth']], function() {
     });
 
     Route::group(['middleware' => ['role:User']], function() {
+        Route::prefix('forms')->group(function() {
+            Route::get('/', [FormController::class, 'index'])->name('form.index');
+            Route::get('/create', [FormController::class, 'create'])->name('form.create');
+            Route::post('/store', [FormController::class, 'store'])->name('form.store');
+            Route::get('/{id}/{slug}/show', [FormController::class, 'show'])->name('form.show');
+            Route::put('/{id}/publish', [FormController::class, 'publish'])->name('form.publish');
+            Route::put('/{id}/unpublish', [FormController::class, 'unpublish'])->name('form.unpublish');
+            Route::post('/bulkInsertForm', [FormController::class, 'bulkInsertForm'])->name('form.bulkInsertForm');
+            Route::delete('/{section_id}/deleteSection', [FormController::class, 'deleteSection'])->name('form.deleteSection');
+            Route::delete('/{id}/destroy', [FormController::class, 'destroy'])->name('form.destroy');
+        });
+
         Route::prefix('auto-message')->group(function() {
             Route::get('/', [AutoMessageController::class, 'index'])->name('auto.message.index');
             Route::get('/create', [AutoMessageController::class, 'create'])->name('auto.message.create');
@@ -86,3 +99,19 @@ Route::group(['middleware' => ['auth']], function() {
         });
     });
 });
+
+Route::get('{slug_user}/{slug_form}', function($slug_user, $slug_form) {
+    return response()->json([
+        "status" => 200,
+        "title"  => "Success",
+        "message"=> "Sabar Tampilan Masih Belum Di Buat"
+    ]);
+})->name('form.public.show');
+
+Route::get('{slug_user}/{slug_form}/priview', function($slug_user, $slug_form) {
+    return response()->json([
+        "status" => 200,
+        "title"  => "Success",
+        "message"=> "Sabar Tampilan Masih Belum Di Buat"
+    ]);
+})->name('form.unpublic.show');

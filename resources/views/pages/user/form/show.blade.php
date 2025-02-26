@@ -171,6 +171,7 @@
                                     <option value="text" {{ $sc->type == 'text' ? 'selected' : '' }}>Text</option>
                                     <option value="number" {{ $sc->type == 'number' ? 'selected' : '' }}>Number</option>
                                     <option value="email" {{ $sc->type == 'email' ? 'selected' : '' }}>Email</option>
+                                    <option value="date" {{ $sc->type == 'date' ? 'selected' : '' }}>Date</option>
                                 </select>
                             </div>
                         </div>
@@ -228,6 +229,7 @@
                                         <option value="text">text</option>
                                         <option value="number">number</option>
                                         <option value="email">email</option>
+                                        <option value="date">date</option>
                                     </select>
                                 </div>
                             </div>

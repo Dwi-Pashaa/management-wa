@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\SubscriptionController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FormPublicController;
 use App\Http\Controllers\User\AcountWhatsaapController;
 use App\Http\Controllers\User\AutoMessageController;
 use App\Http\Controllers\User\ChangePasswordController;
@@ -100,18 +101,6 @@ Route::group(['middleware' => ['auth']], function() {
     });
 });
 
-Route::get('{slug_user}/{slug_form}', function($slug_user, $slug_form) {
-    return response()->json([
-        "status" => 200,
-        "title"  => "Success",
-        "message"=> "Sabar Tampilan Masih Belum Di Buat"
-    ]);
-})->name('form.public.show');
+Route::get('{slug_user}/{slug_form}', [FormPublicController::class, 'index'])->name('form.public.show');
 
-Route::get('{slug_user}/{slug_form}/priview', function($slug_user, $slug_form) {
-    return response()->json([
-        "status" => 200,
-        "title"  => "Success",
-        "message"=> "Sabar Tampilan Masih Belum Di Buat"
-    ]);
-})->name('form.unpublic.show');
+Route::get('{slug_user}/{slug_form}/priview', [FormPublicController::class, 'priview'])->name('form.unpublic.show');

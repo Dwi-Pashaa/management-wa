@@ -102,34 +102,32 @@ class FormController extends Controller
             "is_required.*" => "required"
         ];
 
-        if (!$forms->thumbnail && !$request->hasFile('thumbnail')) {
-            $rules['thumbnail'] = "required";
+        if ((!$forms || !$forms->thumbnail) && $request->hasFile('thumbnail')) {
+            $rules['thumbnail'] = "sometimes|file";
         }
 
-        if (!$forms->header && !$request->hasFile('header')) {
-            $rules['header'] = "required";
+        if ((!$forms || !$forms->header) && $request->hasFile('header')) {
+            $rules['header'] = "sometimes|file";
         }
 
         $request->validate($rules);
 
+        $headerSave = $forms->header ?? null;
         if ($request->hasFile('header')) {
             $header = $request->file('header');
             $headerName = rand() . '.' . $header->getClientOriginalExtension();
             $pathHeader = 'header/';
             $header->move($pathHeader, $headerName);
             $headerSave = $pathHeader . $headerName;
-        } else {
-            $headerSave = $forms->header;
         }
 
+        $thumbnailSave = $forms->thumbnail ?? null;
         if ($request->hasFile('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
             $thumbnailName = rand() . '.' . $thumbnail->getClientOriginalExtension();
             $pathThumbnail = 'thumbnail/';
             $thumbnail->move($pathThumbnail, $thumbnailName);
             $thumbnailSave = $pathThumbnail . $thumbnailName;
-        } else {
-            $thumbnailSave = $forms->thumbnail;
         }
 
         $forms->update([
@@ -163,6 +161,7 @@ class FormController extends Controller
 
         return redirect()->route('form.show', ['id' => $request->forms_id, 'slug' => $forms->slug])->with('success', 'Successfully Customize Form.');
     }
+
 
     public function deleteSection($section_id) 
     {

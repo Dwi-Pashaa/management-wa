@@ -6,23 +6,29 @@
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <title>{{ $form->title }}</title>
   </head>
-  <body>
-    <div class="flex flex-col items-center justify-center bg-gray-100 pb-20">
+  <body class="bg-gray-100">
+    <div class="flex flex-col items-center justify-center pb-10 px-4 sm:px-6 md:px-8 lg:px-10">
       
       <!-- Gambar di atas card -->
-      <div class="relative w-[700px] flex justify-center pb-5">
-        <img src="{{ asset($form->thumbnail) }}" alt="Thumbnail Image" class="w-50 border-4 border-white shadow-md mt-16">
+      <div class="relative w-full max-w-xl flex justify-center pb-5">
+        @if ($form->logo != null)
+          <img src="{{ asset($form->logo) }}" alt="Thumbnail Image" class="w-32 sm:w-40 md:w-50 border-4 border-white shadow-md mt-16">
+        @else
+          <div class="mt-10"></div>
+        @endif
       </div>
 
       <!-- Card -->
-      <div class="bg-white shadow-lg rounded-lg p-8 w-[700px] relative">
-        <h2 class="text-2xl font-bold">Testing</h2>
+      <div class="bg-white shadow-lg rounded-lg p-6 sm:p-8 w-full max-w-xl relative">
+        <h2 class="text-2xl font-bold">{{ $form->title }}</h2>
         <hr class="border-gray-300 my-4">
 
-        <!-- Gambar dalam card -->
-        <div class="my-4 pb-3">
-          <img src="{{ asset($form->thumbnail) }}" alt="Naruto Image" class="w-full rounded-lg">
-        </div>
+        @if ($form->thumbnail != null)
+          <!-- Gambar dalam card -->
+          <div class="my-4 pb-3">
+            <img src="{{ asset($form->thumbnail) }}" alt="Naruto Image" class="w-full rounded-lg">
+          </div>
+        @endif
 
         <p class="text-gray-600 text-sm text-center pt-3">
           {!! $form->desc !!}
@@ -31,7 +37,7 @@
         
         <!-- Form -->
         <form>
-          <div class="grid grid-cols-2 gap-4 pb-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-4">
             <div>
               <label for="first_name" class="text-gray-900 block pb-2">First Name</label>
               <input type="text" id="first_name" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Full Name" />

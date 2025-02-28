@@ -21,7 +21,7 @@
             <div>
                 <a href="{{ route('form.unpublic.show', ['slug_user' => $forms->user->slug, 'slug_form' => $forms->slug]) }}" target="_blank" class="btn btn-primary">
                     <i class="feather icon-eye"></i>
-                    Priview Form
+                    Preview
                 </a>
                 @if ($forms->status === 'publish')
                     <a href="javascript:void(0)" onclick="return unpublish('{{ $forms->id }}')" class="btn btn-secondary">
@@ -206,7 +206,6 @@
     $(document).ready(function() {
         $('#desc').summernote({
             height: 100,
-            toolbar: false,
             placeholder: 'Description Form',
         });
 

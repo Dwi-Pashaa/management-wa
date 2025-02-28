@@ -119,7 +119,7 @@
                             <span class="pcoded-micon">
                                 <i class="feather icon-cpu"></i>
                             </span>
-                            <span class="pcoded-mtext">Set Api Key Watsaapmatic</span>
+                            <span class="pcoded-mtext">Set Api Key Wasapmatic</span>
                         </a>
                     </li>
                     <li class="nav-item {{ Route::is('change.password*') ? 'active' : '' }}">

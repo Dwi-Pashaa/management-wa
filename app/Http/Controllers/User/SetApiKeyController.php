@@ -43,6 +43,10 @@ class SetApiKeyController extends Controller
 
                     if ($device['status'] == 200) {
                         $hasDevices = true;
+
+                        WatsaapMaticKey::where('users_id', Auth::user()->id)->update([
+                            "unique_wa_id" => $device['data'][0]['unique']
+                        ]);
                     } else {
                         $hasDevices = false;
                     }

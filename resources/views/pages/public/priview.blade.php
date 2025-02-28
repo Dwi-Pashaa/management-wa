@@ -21,7 +21,7 @@
 
         <!-- Gambar dalam card -->
         <div class="my-4 pb-3">
-          <img src="{{ asset($form->thumbnail) }}" alt="Naruto Image" class="w-full rounded-lg">
+          <img src="{{ asset($form->thumbnail) }}" alt="Image" class="w-full rounded-lg">
         </div>
 
         <p class="text-gray-600 text-sm text-center pt-3">

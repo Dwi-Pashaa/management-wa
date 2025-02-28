@@ -11,8 +11,8 @@
       
       <!-- Gambar di atas card -->
       <div class="relative w-full max-w-xl flex justify-center pb-5">
-        @if ($form->logo != null)
-          <img src="{{ asset($form->logo) }}" alt="Thumbnail Image" class="w-32 sm:w-40 md:w-50 border-4 border-white shadow-md mt-16">
+        @if ($form->header != null)
+          <img src="{{ asset($form->header) }}" alt="Thumbnail Image" class="w-32 sm:w-40 md:w-50 border-4 border-white shadow-md mt-16">
         @else
           <div class="mt-10"></div>
         @endif

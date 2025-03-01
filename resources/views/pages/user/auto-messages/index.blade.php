@@ -39,6 +39,7 @@
                         <tr>
                             <th>No</th>
                             <th>Title</th>
+                            <th>Status</th>
                             <th>Created</th>
                             <th>#</th>
                         </tr>
@@ -48,6 +49,18 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->title }}</td>
+                                <td style="width: 10%">
+                                    <form action="{{ route('auto.message.updateStatus', ['id' => $item->id]) }}" method="POST" id="formStatus">
+                                        @csrf
+                                        @method("PUT")
+                                        <div class="form-group mb-3">
+                                            <select name="status" id="status" class="form-control">
+                                                <option value="1" {{ $item->status == 1 ? 'selected' : '' }}>Active</option>
+                                                <option value="0" {{ $item->status == 0 ? 'selected' : '' }}>Deactive</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </td>
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y - H:i:s') }}</td>
                                 <td>
                                     <a href="{{ route('auto.message.edit', ['id' => $item->id]) }}" class="btn btn-warning btn-sm" title="Edit">
@@ -68,6 +81,7 @@
                         <tr>
                             <th>No</th>
                             <th>Title</th>
+                            <th>Status</th>
                             <th>Created</th>
                             <th>#</th>
                         </tr>
@@ -131,5 +145,9 @@
                 }
             });
         }
+
+        $("#status").change(function() {
+            $("#formStatus").submit()
+        })
     </script>
 @endpush

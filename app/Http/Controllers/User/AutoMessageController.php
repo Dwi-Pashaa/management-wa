@@ -88,6 +88,18 @@ class AutoMessageController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     */
+    public function updateStatus(Request $request, string $id)
+    {
+        $autoMessage = Message::find($id);
+
+        $autoMessage->update(['status' => $request->status]);
+
+        return redirect()->route('auto.message.index')->with('success', 'Successfully Updated Status Auto Message!');
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)

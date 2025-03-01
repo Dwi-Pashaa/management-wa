@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth']], function() {
             Route::post('/store', [AutoMessageController::class, 'store'])->name('auto.message.store');
             Route::get('/{id}/edit', [AutoMessageController::class, 'edit'])->name('auto.message.edit');
             Route::put('/{id}/update', [AutoMessageController::class, 'update'])->name('auto.message.update');
+            Route::put('/{id}/updateStatus', [AutoMessageController::class, 'updateStatus'])->name('auto.message.updateStatus');
             Route::delete('/{id}/destroy', [AutoMessageController::class, 'destroy'])->name('auto.message.destroy');
         });
 
@@ -102,5 +103,6 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 Route::get('{slug_user}/{slug_form}', [FormPublicController::class, 'index'])->name('form.public.show');
+Route::post('/submit', [FormPublicController::class, 'submit'])->name('form.public.submit');
 
 Route::get('{slug_user}/{slug_form}/priview', [FormPublicController::class, 'priview'])->name('form.unpublic.show');

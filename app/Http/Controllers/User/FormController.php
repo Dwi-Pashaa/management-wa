@@ -139,26 +139,15 @@ class FormController extends Controller
         ]);
 
         foreach ($request->name as $key => $value) {
-            $sectionId = $request->section_id[$key] ?? null;
-
-            if ($sectionId) {
-                Section::where('id', $sectionId)->update([
-                    'name' => $value,
-                    'slug' => Str::slug($value),
-                    'type' => $request->type[$key] ?? null,
-                    'is_required' => $request->is_required[$key] ?? 'no'
-                ]);
-            } else {
-                Section::create([
-                    'forms_id' => $request->forms_id,
-                    'name' => $value,
-                    'slug' => Str::slug($value),
-                    'type' => $request->type[$key] ?? null,
-                    'is_required' => $request->is_required[$key] ?? 'no'
-                ]);
-            }
+            Section::create([
+                'forms_id' => $request->forms_id,
+                'name' => $value,
+                'slug' => Str::slug($value),
+                'type' => $request->type[$key] ?? null,
+                'is_required' => $request->is_required[$key] ?? 'no'
+            ]);
         }
-
+        
         return redirect()->route('form.show', ['id' => $request->forms_id, 'slug' => $forms->slug])->with('success', 'Successfully Customize Form.');
     }
 

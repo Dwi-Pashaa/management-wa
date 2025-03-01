@@ -76,7 +76,7 @@
             <label for="phone" class="text-gray-900 block pb-2">Phone</label>
             <input type="tel" name="phone" id="phone" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" placeholder="Telephone Number" />
             <span class="text-sm text-gray-400 m-1">
-              Silahkan masukan nomor telepon dengan format +60
+              Please enter the telephone number in the format +60
             </span>
           </div>
 

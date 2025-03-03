@@ -10,6 +10,7 @@ use App\Models\WatsaapMaticKey;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Illuminate\Support\Facades\Auth;
 
 class FormPublicController extends Controller
 {
@@ -57,7 +58,7 @@ class FormPublicController extends Controller
             "phone" => "required"
         ]);  
 
-        $autoMessage = Message::where('status', 1)->latest()->first();
+        $autoMessage = Message::where('users_id', Auth::user()->id)->where('status', 1)->latest()->first();
         $apikey = WatsaapMaticKey::where('users_id', $request->users_id)->first();
 
         if (!$apikey || !$autoMessage) {
